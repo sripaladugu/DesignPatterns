@@ -122,3 +122,63 @@ Easier to Exchange Families of Products: The client can use different families o
 Consistency Among Products: Ensures that products created by a factory are compatible with each other.
 **Conclusion:**
 The Abstract Factory Pattern is useful when a system needs to be independent of the way its objects are created and composed. It provides an interface to create families of related objects, ensuring that the products created are consistent and compatible with each other. This pattern promotes flexibility and scalability in the design of a system.
+
+**UML-Diagram:**
+
+```mermaid
+classDiagram
+    FurnitureFactory <|-- VictorianFurnitureFactory
+    FurnitureFactory <|-- ModernFurnitureFactory
+
+    FurnitureFactory : +create_chair() Chair
+    FurnitureFactory : +create_sofa() Sofa
+
+    Chair <|-- VictorianChair
+    Chair <|-- ModernChair
+
+    Sofa <|-- VictorianSofa
+    Sofa <|-- ModernSofa
+
+    class FurnitureFactory {
+        +create_chair() Chair
+        +create_sofa() Sofa
+    }
+
+    class VictorianFurnitureFactory {
+        +create_chair() Chair
+        +create_sofa() Sofa
+    }
+
+    class ModernFurnitureFactory {
+        +create_chair() Chair
+        +create_sofa() Sofa
+    }
+
+    class Chair {
+        +has_legs() str
+        +sit_on() str
+    }
+
+    class VictorianChair {
+        +has_legs() str
+        +sit_on() str
+    }
+
+    class ModernChair {
+        +has_legs() str
+        +sit_on() str
+    }
+
+    class Sofa {
+        +lie_on() str
+    }
+
+    class VictorianSofa {
+        +lie_on() str
+    }
+
+    class ModernSofa {
+        +lie_on() str
+    }
+
+```

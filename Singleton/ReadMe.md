@@ -98,3 +98,20 @@ print(singleton1.some_business_logic())
 
 **Conclusion:**
 The Singleton Pattern is useful for managing shared resources or global state, such as configuration settings, logging instances, or database connections. By ensuring a class has only one instance, the pattern helps in maintaining consistency and controlling access across a system.
+
+**UML-Diagram:**
+
+```mermaid
+classDiagram
+    class Singleton {
+        -_instance: Singleton
+        +__new__(cls) Singleton
+        +get_instance() Singleton
+        +some_business_logic() str
+    }
+
+    Singleton : - _instance
+    Singleton : + __new__(cls) Singleton
+    Singleton : + get_instance() Singleton
+    Singleton : + some_business_logic() str
+```

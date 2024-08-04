@@ -89,3 +89,42 @@ Open/Closed Principle: New types of products can be added by introducing new sub
 
 **Conclusion:**
 The Factory Method Pattern is an effective way to manage and extend the creation of objects in a system. It provides flexibility in choosing the object to be created and encapsulates the instantiation logic, adhering to key principles of object-oriented design.
+
+**UML-Diagram:**
+
+```mermaid
+classDiagram
+    Logistics <|-- RoadLogistics
+    Logistics <|-- SeaLogistics
+
+    Logistics : +create_transport() Transport
+    Logistics : +plan_delivery() str
+
+    Transport <|-- Truck
+    Transport <|-- Ship
+
+    class Logistics {
+        +create_transport() Transport
+        +plan_delivery() str
+    }
+
+    class RoadLogistics {
+        +create_transport() Transport
+    }
+
+    class SeaLogistics {
+        +create_transport() Transport
+    }
+
+    class Transport {
+        +deliver() str
+    }
+
+    class Truck {
+        +deliver() str
+    }
+
+    class Ship {
+        +deliver() str
+    }
+```
