@@ -13,3 +13,4 @@
 ## Behavioral Design Patterns
 
 - [Observer](Observer/ReadMe.md)
+- [Strategy](Strategy/ReadMe.md)
