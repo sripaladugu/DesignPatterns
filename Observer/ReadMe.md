@@ -141,3 +141,41 @@ classDiagram
     Observer <|-- ConcreteObserver
     ConcreteSubject "1" o-- "*" Observer : observers
 ```
+
+Here are some common places where the Observer Pattern is utilized in Python:
+
+1. logging Module
+   The logging module in Python uses a form of the Observer Pattern to notify multiple handlers about log events.
+
+Example:
+
+```python
+import logging
+
+# Create a logger
+logger = logging.getLogger('my_logger')
+
+# Create handlers
+console_handler = logging.StreamHandler()
+file_handler = logging.FileHandler('logfile.log')
+
+# Set log levels
+console_handler.setLevel(logging.DEBUG)
+file_handler.setLevel(logging.INFO)
+
+# Create a formatter and set it for the handlers
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(formatter)
+file_handler.setFormatter(formatter)
+
+# Add handlers to the logger
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+
+# Log messages
+logger.debug('This is a debug message')
+logger.info('This is an info message')
+logger.warning('This is a warning message')
+logger.error('This is an error message')
+logger.critical('This is a critical message')
+```

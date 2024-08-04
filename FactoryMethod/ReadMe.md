@@ -77,11 +77,12 @@ if __name__ == "__main__":
 ```
 
 **Explanation:**
-Transport is the product interface with the deliver method.
-Truck and Ship are concrete products implementing the Transport interface.
-Logistics is the abstract creator class with the create_transport method, which must be overridden by subclasses.
-RoadLogistics and SeaLogistics are concrete creators that return specific products.
-When running the client code, it will use the specific logistics strategy to create the transport method and plan the delivery accordingly.
+
+- Transport is the product interface with the deliver method.
+- Truck and Ship are concrete products implementing the Transport interface.
+- Logistics is the abstract creator class with the create_transport method, which must be overridden by subclasses.
+- RoadLogistics and SeaLogistics are concrete creators that return specific products.
+  When running the client code, it will use the specific logistics strategy to create the transport method and plan the delivery accordingly.
 
 **Benefits:**
 Single Responsibility Principle: The factory method allows the product creation code to be placed in one location, making the code easier to manage and modify.
@@ -96,9 +97,6 @@ The Factory Method Pattern is an effective way to manage and extend the creation
 classDiagram
     Logistics <|-- RoadLogistics
     Logistics <|-- SeaLogistics
-
-    Logistics : +create_transport() Transport
-    Logistics : +plan_delivery() str
 
     Transport <|-- Truck
     Transport <|-- Ship
@@ -128,3 +126,58 @@ classDiagram
         +deliver() str
     }
 ```
+
+All this might looking intimidating with all the code and UML diagrams. But the Factory Method Pattern is a simple and powerful pattern that can be used to create objects in a flexible and extensible way. Instead of using classes i.e. creater classes and concrete classes, we can also use functions to implement the Factory Method Pattern. Here is the same example using functions:
+
+```python
+class Transport:
+    def deliver(self):
+        pass
+
+class Truck(Transport):
+    def deliver(self):
+        return "Delivering by land in a box."
+
+class Ship(Transport):
+    def deliver(self):
+        return "Delivering by sea in a container."
+
+def create_transport(transport_mode: str):
+    transport_dict = {
+        "road": Truck,
+        "sea": Ship
+    }
+    return transport_dict.get(transport_mode)()
+
+if __name__ == "__main__":
+    print("App: Launched with RoadLogistics.")
+    create_transport("road").deliver()
+
+    print("\nApp: Launched with SeaLogistics.")
+    create_transport("sea").deliver()
+```
+
+Strictly object-oriented design is not always necessary. The Factory Method Pattern can be implemented using functions, as shown in the example above.
+
+Where is the Factory Method Pattern used in the Python standard library or popular Python packages?
+**SQLAlchemy**
+SQLAlchemy, a SQL toolkit and Object-Relational Mapping (ORM) library for Python, uses the Factory Method Pattern to create database connections and sessions.
+
+Example: Creating a Database Session
+
+```python
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+# Create an engine using the factory method
+engine = create_engine('sqlite:///example.db')
+
+# Create a configured "Session" class using the factory method
+Session = sessionmaker(bind=engine)
+
+# Create a session using the factory method
+session = Session()
+
+```
+
+For more details take a peek at [SqlAlchemy create_engine Factory Method](https://github.com/zzzeek/sqlalchemy/blob/main/lib/sqlalchemy/engine/create.py)

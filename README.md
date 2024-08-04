@@ -9,3 +9,7 @@
 ## Structural Design Patterns
 
 - [Decorator](Decorator/ReadMe.md)
+
+## Behavioral Design Patterns
+
+- [Observer](Observer/ReadMe.md)

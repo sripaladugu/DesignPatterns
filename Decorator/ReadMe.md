@@ -132,3 +132,144 @@ classDiagram
         +send_sms(message: str)
     }
 ```
+
+The _Decorator Pattern_ is widely used in various Python modules and libraries to enhance or modify the behavior of functions or classes. Here are some common places where the Decorator Pattern is utilized in Python:
+
+1.  **Standard Library Decorators**:
+
+    - **@staticmethod** and **@classmethod**: Used to define static methods and class methods in classes.
+
+    ```python
+    class MyClass:
+        @staticmethod
+        def static_method():
+            print("This is a static method.")
+
+        @classmethod
+        def class_method(cls):
+            print(f"This is a class method of {cls}.")
+    ```
+
+    - **@property**: Used to define getter, setter, and deleter methods for class properties.
+
+    ```python
+    class MyClass:
+        def __init__(self, value):
+            self._value = value
+
+        @property
+        def value(self):
+            return self._value
+
+        @value.setter
+        def value(self, value):
+            self._value = value
+
+        @value.deleter
+        def value(self):
+            del self._value
+    ```
+
+2.  **functools Module**
+
+    _@functools.lru_cache_
+    _Usage:_ Used to cache the results of expensive function calls.
+
+    ```python
+    import functools
+
+    @functools.lru_cache(maxsize=128)
+    def expensive_function(param): # Expensive computation
+        return result
+    ```
+
+    **@functools.wraps**
+    Usage: Used to preserve the original function's metadata when creating decorators.
+
+    ```python
+    import functools
+
+    def my_decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            print("Something is happening before the function is called.")
+            result = func(*args, **kwargs)
+            print("Something is happening after the function is called.")
+            return result
+        return wrapper
+
+    @my_decorator
+    def say_hello():
+        print("Hello!")
+    ```
+
+3.  **Flask**
+    Usage: Flask uses decorators to define routes and handle HTTP methods.
+
+```python
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello, Flask!"
+
+if __name__ == '__main__':
+    app.run()
+
+```
+
+4. **Django**
+   Usage: Django uses decorators for views, such as login required and permission required.
+
+```python
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def my_view(request):
+    return HttpResponse("Hello, Django!")
+
+```
+
+5. Click
+   Usage: Click uses decorators to define command-line interfaces.
+
+```python
+import click
+
+@click.command()
+@click.option('--count', default=1, help='Number of greetings.')
+@click.option('--name', prompt='Your name', help='The person to greet.')
+def hello(count, name):
+    for _ in range(count):
+        click.echo(f"Hello, {name}!")
+
+if __name__ == '__main__':
+    hello()
+
+```
+
+6. Pandas
+   Usage: Pandas uses decorators to handle deprecations and docstrings.
+
+```python
+import pandas as pd
+from pandas.util.decorators import Appender
+
+_shared_docs = {"method": "This is a shared docstring"}
+
+@Appender(_shared_docs["method"])
+def my_method():
+    pass
+
+```
+
+**Summary**
+The Decorator Pattern is a versatile and powerful design pattern widely used in Python for:
+
+- Enhancing functions or methods without modifying their structure.
+- Providing a clear and readable way to apply reusable modifications.
+- Simplifying code by abstracting repetitive patterns.
+- Understanding and utilizing decorators can greatly improve your ability to write clean, efficient, and maintainable Python code.

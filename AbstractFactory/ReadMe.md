@@ -130,9 +130,6 @@ classDiagram
     FurnitureFactory <|-- VictorianFurnitureFactory
     FurnitureFactory <|-- ModernFurnitureFactory
 
-    FurnitureFactory : +create_chair() Chair
-    FurnitureFactory : +create_sofa() Sofa
-
     Chair <|-- VictorianChair
     Chair <|-- ModernChair
 

@@ -115,3 +115,81 @@ classDiagram
     Singleton : + get_instance() Singleton
     Singleton : + some_business_logic() str
 ```
+
+Here are some common places where the Singleton Pattern is utilized in Python:
+
+1. Logging
+   The logging module in Python often utilizes a singleton-like behavior to manage logging configurations globally.
+
+Example:
+
+```python
+import logging
+
+# Configure logging once
+logging.basicConfig(level=logging.DEBUG)
+
+# Retrieve the same logger instance everywhere
+logger1 = logging.getLogger("my_logger")
+logger2 = logging.getLogger("my_logger")
+
+assert logger1 is logger2
+
+logger1.debug("This is a debug message")
+logger2.info("This is an info message")
+
+```
+
+2. Configuration Management
+   Singletons are commonly used to manage configuration settings, ensuring that all parts of an application use the same configuration.
+
+Example:
+
+```python
+class Configuration:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Configuration, cls).__new__(cls, *args, **kwargs)
+            # Initialize the configuration
+            cls._instance.config = {}
+        return cls._instance
+
+# Usage
+config1 = Configuration()
+config2 = Configuration()
+
+assert config1 is config2
+
+config1.config["setting"] = "value"
+print(config2.config["setting"])  # Output: value
+```
+
+3. Database Connections
+   Database connection management often uses the Singleton Pattern to ensure that only one connection pool or database connection instance is created.
+
+Example with SQLAlchemy:
+
+```python
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+class Database:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Database, cls).__new__(cls, *args, **kwargs)
+            cls._instance.engine = create_engine('sqlite:///example.db')
+            cls._instance.Session = sessionmaker(bind=cls._instance.engine)
+        return cls._instance
+
+# Usage
+db1 = Database()
+db2 = Database()
+
+assert db1 is db2
+
+session = db1.Session()
+```
