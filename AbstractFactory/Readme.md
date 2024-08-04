@@ -1,15 +1,17 @@
-The Abstract Factory Pattern is another creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes. This pattern is useful when a system needs to be independent of how its objects are created, composed, and represented, and when the system needs to be configured with one of multiple families of products.
+The **Abstract Factory Pattern** is another creational design pattern that provides an interface for creating families of related or dependent objects without specifying their concrete classes. This pattern is useful when a system needs to be independent of how its objects are created, composed, and represented, and when the system needs to be configured with one of multiple families of products.
 
-Key Components:
-Abstract Factory: Declares a set of methods for creating each of the abstract products.
-Concrete Factory: Implements the methods defined by the abstract factory to create concrete products.
-Abstract Product: Declares an interface for a type of product.
-Concrete Product: Implements the abstract product interface.
-Client: Uses only the interfaces declared by the abstract factory and abstract product classes.
-Example in Python:
+**Key Components:**
+
+- Abstract Factory: Declares a set of methods for creating each of the abstract products.
+- Concrete Factory: Implements the methods defined by the abstract factory to create concrete products.
+- Abstract Product: Declares an interface for a type of product.
+- Concrete Product: Implements the abstract product interface.
+- Client: Uses only the interfaces declared by the abstract factory and abstract product classes.
+
+**Example in Python:**
 Let's implement an abstract factory pattern for creating a set of related objects: chairs and sofas. We will have two styles of furniture: Victorian and Modern.
 
-Abstract Product Interfaces:
+**Abstract Product Interfaces:**
 
 ```python
 from abc import ABC, abstractmethod
@@ -29,7 +31,7 @@ class Sofa(ABC):
         pass
 ```
 
-Concrete Products:
+**Concrete Products:**
 
 ```python
 class VictorianChair(Chair):
@@ -55,7 +57,7 @@ class ModernSofa(Sofa):
         return "Lying on a Modern Sofa."
 ```
 
-Abstract Factory Interface:
+**Abstract Factory Interface:**
 
 ```python
 
@@ -69,7 +71,7 @@ class FurnitureFactory(ABC):
         pass
 ```
 
-Concrete Factories:
+**Concrete Factories:**
 
 ```python
 class VictorianFurnitureFactory(FurnitureFactory):
@@ -87,7 +89,7 @@ class ModernFurnitureFactory(FurnitureFactory):
         return ModernSofa()
 ```
 
-Client Code:
+**Client Code:**
 
 ```python
 
@@ -107,16 +109,16 @@ if __name__ == "__main__":
     client_code(ModernFurnitureFactory())
 ```
 
-Explanation:
+**Explanation:**
 Chair and Sofa are abstract product interfaces with methods that must be implemented by concrete products.
 VictorianChair, ModernChair, VictorianSofa, and ModernSofa are concrete products implementing the respective interfaces.
 FurnitureFactory is the abstract factory interface with methods for creating chairs and sofas.
 VictorianFurnitureFactory and ModernFurnitureFactory are concrete factories that return specific products.
 When running the client code, it will use a specific factory to create a set of related products (chairs and sofas) and interact with them through their abstract interfaces.
 
-Benefits:
+**Benefits:**
 Encapsulation of Concrete Classes: The client code works with abstract interfaces, not concrete classes, which means the specific implementations are hidden.
 Easier to Exchange Families of Products: The client can use different families of products by switching the factory instance.
 Consistency Among Products: Ensures that products created by a factory are compatible with each other.
-Conclusion:
+**Conclusion:**
 The Abstract Factory Pattern is useful when a system needs to be independent of the way its objects are created and composed. It provides an interface to create families of related objects, ensuring that the products created are consistent and compatible with each other. This pattern promotes flexibility and scalability in the design of a system.
