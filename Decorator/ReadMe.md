@@ -97,3 +97,43 @@ When running the client code, you can see how different decorators add behaviors
 
 **Conclusion:**
 The Decorator Pattern is a powerful tool for dynamically adding behaviors to objects. It promotes flexible and reusable code by adhering to key object-oriented principles, making it easier to extend and maintain functionality in a clean and manageable way.
+
+**UML Diagram:**
+
+```plantuml
+@startuml decorator_uml_diagram
+skinparam FontName Courier
+skinparam handwritten true
+
+interface Notifier {
++send(message: str)
+}
+
+class SimpleNotifier implements Notifier {
++send(message: str)
+}
+
+abstract class NotifierDecorator implements Notifier {
+-notifier: Notifier
++NotifierDecorator(notifier: Notifier)
++send(message: str)
+}
+
+class EmailDecorator extends NotifierDecorator {
++send(message: str)
++send_email(message: str)
+}
+
+class SMSDecorator extends NotifierDecorator {
++send(message: str)
++send_sms(message: str)
+}
+
+Notifier <|.. SimpleNotifier
+Notifier <|.. NotifierDecorator
+NotifierDecorator <|-- EmailDecorator
+NotifierDecorator <|-- SMSDecorator
+NotifierDecorator o-- Notifier
+
+@enduml
+```
