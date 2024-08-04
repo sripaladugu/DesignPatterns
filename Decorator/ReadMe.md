@@ -100,40 +100,35 @@ The Decorator Pattern is a powerful tool for dynamically adding behaviors to obj
 
 **UML Diagram:**
 
-```plantuml
-@startuml decorator_uml_diagram
-skinparam FontName Courier
-skinparam handwritten true
+```mermaid
+classDiagram
+    Notifier <|-- SimpleNotifier
+    Notifier <|-- NotifierDecorator
+    NotifierDecorator <|-- EmailDecorator
+    NotifierDecorator <|-- SMSDecorator
+    NotifierDecorator o-- Notifier
 
-interface Notifier {
-+send(message: str)
-}
+    class Notifier {
+        +send(message: str)
+    }
 
-class SimpleNotifier implements Notifier {
-+send(message: str)
-}
+    class SimpleNotifier {
+        +send(message: str)
+    }
 
-abstract class NotifierDecorator implements Notifier {
--notifier: Notifier
-+NotifierDecorator(notifier: Notifier)
-+send(message: str)
-}
+    class NotifierDecorator {
+        -notifier: Notifier
+        +NotifierDecorator(notifier: Notifier)
+        +send(message: str)
+    }
 
-class EmailDecorator extends NotifierDecorator {
-+send(message: str)
-+send_email(message: str)
-}
+    class EmailDecorator {
+        +send(message: str)
+        +send_email(message: str)
+    }
 
-class SMSDecorator extends NotifierDecorator {
-+send(message: str)
-+send_sms(message: str)
-}
-
-Notifier <|.. SimpleNotifier
-Notifier <|.. NotifierDecorator
-NotifierDecorator <|-- EmailDecorator
-NotifierDecorator <|-- SMSDecorator
-NotifierDecorator o-- Notifier
-
-@enduml
+    class SMSDecorator {
+        +send(message: str)
+        +send_sms(message: str)
+    }
 ```
