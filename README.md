@@ -14,3 +14,4 @@
 
 - [Observer](Observer/ReadMe.md)
 - [Strategy](Strategy/ReadMe.md)
+- [Template Method](TemplateMethod/ReadMe.md)
